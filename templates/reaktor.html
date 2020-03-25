@@ -1,0 +1,412 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 ">
+                <div class="panel panel-default">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th colspan="2">KV1 (Beschickungsleitung)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="radio radio_choice">
+                                    <label><input type="radio" name="KV1_auto_aktiv" id="KV1_auto_1"
+                                                  value="1">aktiviert</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="radio radio_choice">
+                                    <label><input type="radio" name="KV1_auto_aktiv" id="KV1_auto_0"
+                                                  value="0">deaktiviert</label>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table class="table table-hover" id="table_input_sollwert">
+                    <thead>
+                    <tr>
+                        <th>Nr.</th>
+                        <th>Neue <br>Startzeit</th>
+                        <th>aktuelle <br>Startzeit</th>
+                        <th>Neue Beschick-<br>menge [l]</th>
+                        <th>aktuelle Beschick-<br>menge [l]</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit1"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit1">{{ sql_results['Startzeit1'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes1"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes1">{{ sql_results['V_RBes1'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit2"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit2">{{ sql_results['Startzeit2'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes2"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes2">{{ sql_results['V_RBes2'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit3"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit3">{{ sql_results['Startzeit3'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes3"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes3">{{ sql_results['V_RBes3'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>4</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit4"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit4">{{ sql_results['Startzeit4'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes4"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes4">{{ sql_results['V_RBes4'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>5</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit5"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit5">{{ sql_results['Startzeit5'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes5"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes5">{{ sql_results['V_RBes5'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>6</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit6"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit6">{{ sql_results['Startzeit6'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes6"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes6">{{ sql_results['V_RBes6'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>7</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit7"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit7">{{ sql_results['Startzeit7'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes7"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes7">{{ sql_results['V_RBes7'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>8</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit8"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit8">{{ sql_results['Startzeit8'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes8"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes8">{{ sql_results['V_RBes8'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>9</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit9"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit9">{{ sql_results['Startzeit9'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes9"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes9">{{ sql_results['V_RBes9'] }}</td>
+                    </tr>
+
+                    <tr>
+                        <td>10</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="time" class="form-control input input_sollwert" id="Startzeit10"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Startzeit10">{{ sql_results['Startzeit10'] }}</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="V_RBes10"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-V_RBes10">{{ sql_results['V_RBes10'] }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <script>
+                    // Radiobuttons initialisieren
+                    //  Notfall Vorlage
+                    kv1_auto = "{{sql_results['KV1_auto_aktiv']}}";
+                    if (kv1_auto == 1) {
+                        $('input:radio[name=KV1_auto_aktiv]#KV1_auto_1').prop('checked', true);
+                    }
+                    else if (kv1_auto == 0) {
+                        $('input:radio[name=KV1_auto_aktiv]#KV1_auto_0').prop('checked', true);
+                    }
+                    ;
+                </script>
+            </div>
+
+
+            <!--Tabelle sollwerte-->
+            <div class="col-lg-7">
+                <div class="panel panel-default">
+                    <table class="table table-hover" id="table_input_sollwert">
+                        <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Bezeichnung/Funktion</th>
+                            <th>Neuer Wert</th>
+                            <th>Aktueller Wert</th>
+                            <th>Einheit</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td>V2<sub>krit</sub></td>
+                            <td>Trockenlaufschutz für P3</td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="V2_krit"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-V2_krit">{{ sql_results['V2_krit'] }}</td>
+                            <td>[mbar]</td>
+                        </tr>
+
+                        <tr>
+                            <td>T<sub>P2,max1</sub></td>
+                            <td>Maximale Laufzeit von P2 für Abbruch der Reaktor-Beschickung
+                            </td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="T_P2_max1"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-T_P2_max1">{{ sql_results['T_P2_max1'] }}</td>
+                            <td>[sec]</td>
+                        </tr>
+
+                        <tr>
+                            <td>f<sub>P2</sub></td>
+                            <td>Einstellbare Frequenz P2
+                            </td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="n_P2"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-n_P2">{{ sql_results['n_P2'] }}</td>
+                            <td>[Hz]</td>
+                        </tr>
+                        <tr>
+                            <td>f<sub>P2,min</sub></td>
+                            <td>minimale Frequenz P2</td>
+                            <td>21.0</td>
+                            <td></td>
+                            <td>[Hz]</td>
+                        </tr>
+                        <tr>
+                            <td>f<sub>P2,max</sub></td>
+                            <td>maximale Frequenz P2</td>
+                            <td>84.0</td>
+                            <td></td>
+                            <td>[Hz]</td>
+                        </tr>
+
+                        <tr>
+                            <td>ϑ<sub>MH,min</sub></td>
+                            <td>kleiner gleich ϑ<sub>MH,min</sub> Mantelheizung ist an
+                            </td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="theta_MH_min"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-theta_MH_min">{{ sql_results['theta_MH_min'] }}</td>
+                            <td>[°C]</td>
+                        </tr>
+
+                        <tr>
+                            <td>ϑ<sub>MH,max</sub></td>
+                            <td>über ϑ<sub>MH,max</sub> Mantelheizung ist aus
+                            </td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="theta_MH_max"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-theta_MH_max">{{ sql_results['theta_MH_max'] }}</td>
+                            <td>[°C]</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>T<sub>P3,an</sub></td>
+                            <td>Einstellbare Laufzeit P3</td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="T_P3_an"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-T_P3_an">{{ sql_results['T_P3_an'] }}</td>
+                            <td>[sec]</td>
+                        </tr>
+                        <tr>
+                            <td>T<sub>P3,aus</sub></td>
+                            <td>Einstellbare Pausenzeit P3
+                            </td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="T_P3_aus"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-T_P3_aus">{{ sql_results['T_P3_aus'] }}</td>
+                            <td>[sec]</td>
+                        </tr>
+                        <tr>
+                            <td>f<sub>P3</sub></td>
+                            <td>Einstellbare Frequenz P3
+                            </td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="n_P3"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-n_P3">{{ sql_results['n_P3'] }}</td>
+                            <td>[Hz]</td>
+                        </tr>
+                        <tr>
+                            <td>f<sub>P3,min</sub></td>
+                            <td>minimale Frequenz P3</td>
+                            <td>21.0</td>
+                            <td></td>
+                            <td>[Hz]</td>
+                        </tr>
+                        <tr>
+                            <td>f<sub>P3,max</sub></td>
+                            <td>maximale Frequenz P3</td>
+                            <td>84.0</td>
+                            <td></td>
+                            <td>[Hz]</td>
+                        </tr>
+
+                        <!--V1.20 Nachtrag: P3 geht mit einer einstellbaren Zeit vor P2 aus-->
+                        <tr>
+                            <td>T<sub>P2,bevor ein</sub></td>
+                            <td>Zeitraum bevor P2 einschaltet und in dem P3 ausschaltet.
+                            </td>
+                            <td>
+                                <div class='col-md-12'>
+                                    <input type="number" class="form-control input input_sollwert" id="T_P2_bevor_ein"
+                                           placeholder="Enter"/>
+                                </div>
+                            </td>
+                            <td id="td-T_P2_bevor_ein">{{ sql_results['T_P2_bevor_ein'] }}</td>
+                            <td>[min]</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

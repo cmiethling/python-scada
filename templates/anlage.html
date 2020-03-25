@@ -1,0 +1,359 @@
+{#<?xml version="1.0" encoding="UTF-8" standalone="no"?>#}
+{% extends "layout.html" %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="../static/css/Anlage_positionen.css">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-hover" id="table_input_sollwert">
+                            <thead>
+                            <tr>
+                                <th>Bezeichnung</th>
+                                <th>aktueller <br>Messwert</th>
+                                <th>Einheit</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>MID KA-Zulauf</td>
+                                <td>
+                                    <div class="monitor_val" id="id-MID">{{ sql_results['MID'] }}</div>
+                                </td>
+                                <td>[m³/h]</td>
+                            </tr>
+                            <tr>
+                                <td>Rechen TOC</td>
+                                <td>
+                                    <div class="monitor_val" id="id-TOC">{{ sql_results['TOC'] }}</div>
+                                </td>
+                                <td>[mg/l]</td>
+                            </tr>
+                            <tr>
+                                <td>Rechen N<sub>ges</sub></td>
+                                <td>
+                                    <div class="monitor_val" id="id-N_ges">{{ sql_results['N_ges'] }}</div>
+                                </td>
+                                <td>[mg/l]</td>
+                            </tr>
+                            <tr>
+                                <td>Rechen Redox</td>
+                                <td>
+                                    <div class="monitor_val" id="id-Redox">{{ sql_results['Redox'] }}</div>
+                                </td>
+                                <td>[mV]</td>
+                            </tr>
+                            <tr>
+                                <td>Rechen Trübung</td>
+                                <td>
+                                    <div class="monitor_val" id="id-Truebung">{{ sql_results['Truebung'] }}</div>
+                                </td>
+                                <td>[FNU]</td>
+                            </tr>
+                            <tr>
+                                <td>Rechen pH1</td>
+                                <td>
+                                    <div class="monitor_val" id="id-pH1">{{ sql_results['pH1'] }}</div>
+                                </td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Rechen LF</td>
+                                <td>
+                                    <div class="monitor_val" id="id-LF">{{ sql_results['LF'] }}</div>
+                                </td>
+                                <td>[mS/cm]</td>
+                            </tr>
+                            <!--V2.01 Nachtrag-->
+                            <tr>
+                                <td>Rechen Temperatur</td>
+                                <td>
+                                    <div class="monitor_val" id="id-Temp_Re">{{ sql_results['Temp_Re'] }}</div>
+                                </td>
+                                <td>[°C]</td>
+                            </tr>
+                            
+
+                            <tr>
+                                <td>Vorlage pH2</td>
+                                <td>
+                                    <div class="monitor_val" id="id-pH2">{{ sql_results['pH2'] }}</div>
+                                </td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Vorlage Vega1</td>
+                                <td>
+                                    <div class="monitor_val" id="id-Vega1">{{ sql_results['Vega1'] }}</div>
+                                </td>
+                                <td>[cm]</td>
+                            </tr>
+                            <!--V1.20 Nachtrag-->
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="monitor_val" id="id-Vega1_l">{{ sql_results['Vega1_l'] }}</div>
+                                </td>
+                                <td>[l]</td>
+                            </tr>
+                            <tr>
+                                <td>c<sub>TOC,Vorlage</sub></td>
+                                <td>
+                                    <div class="monitor_val"
+                                         id="id-c_TOC_Vorlage">{{ sql_results['c_TOC_Vorlage'] }}</div>
+                                </td>
+                                <td>[mg/l]</td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Reaktor pH3</td>
+                                <td>
+                                    <div class="monitor_val" id="id-pH3">{{ sql_results['pH3'] }}</div>
+                                </td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Reaktor Vega2</td>
+                                <td>
+                                    <div class="monitor_val" id="id-Vega2">{{ sql_results['Vega2'] }}</div>
+                                </td>
+                                <td>[mbar]</td>
+                            </tr>
+                            <tr>
+                                <td>Reaktor Temp</td>
+                                <td>
+                                    <div class="monitor_val" id="id-Temp">{{ sql_results['Temp'] }}</div>
+                                </td>
+                                <td>[°C]</td>
+                            </tr>
+                            <tr>
+                                <td>Reaktor Gasvolumen</td>
+                                <td>
+                                    <div class="monitor_val" id="id-Gas">
+                                        {{ sql_results['Gas'] }}
+                                    </div>
+                                </td>
+                                <td>[l]</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input type="number" class="form-control input input_sollwert" id="Gas"
+                                           placeholder="Gas"/>
+                                </td>
+                                <td>[l]</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--    Anlagen Bild mit allen Buttons-->
+            <div class="col-lg-9 col-md-9">
+                <div class="bild">
+                    <!--    Bild-->
+                    <object type="image/svg+xml" data="../static/images/Anlage.svg">
+                        Your browser does not support SVG
+                    </object>
+                    <!--    positionen aus Inkscape Anlage.svg (x=left,y=bottom)-->
+                    <!--    P1: Ein/Aus Button-->
+                    <button type="button" class="btn btn-primary btn-sm button_js posi" id="H_P1" value="change"
+                            style="left: 220px; bottom: 210px;">E/A
+                    </button>
+                    <!--    P1: Betriebsrueckmeldung-->
+                    <div class="monitor_meld posi btn-sm" id="id-P1_EIN"
+                         style="left: 220px; bottom: 250px;"><b>P1</b></div>
+                    <!--    P1: Stoermeldung-->
+                    <div class="monitor_meld posi btn-sm" id="id-P1_St"
+                         style="left: 220px; bottom: 250px;"><b>P1</b></div>
+
+                    <!--    P2-->
+                    <button type="button" class="btn btn-primary btn-sm button_js posi" id="H_P2" value="change"
+                            style="left: 336px; bottom: 47px;">E/A
+                    </button>
+                    <div class="monitor_meld posi btn-sm" id="id-P2_EIN"
+                         style="left: 336px; bottom: 87px;"><b>P2</b></div>
+                    <div class="monitor_meld posi btn-sm" id="id-P2_St"
+                         style="left: 336px; bottom: 87px;"><b>P2</b></div>
+                    <!--    P2: Frequenzaenderung-->
+                    <div class="posi" style="left: 388px; bottom: 55px; width: 70px;">
+                        <table id="table_input_sollwert" align="center">
+                            <tbody>
+                            <!--    P2: Einstellbare Frequenz-->
+                            <tr>
+                                <input type="number" class="form-control input input_sollwert" id="n_P2"
+                                       placeholder="Frequenz"/>
+                            </tr>
+                            <!--    P2: Frequenz Rueckmeldung-->
+                            <tr>
+                                <td id="td-n_P2"> {{ sql_results['n_P2'] }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!--    P3-->
+                    <button type="button" class="btn btn-primary btn-sm button_js posi" id="H_P3" value="change"
+                            style="left: 543px; bottom: 4px;">E/A
+                    </button>
+                    <div class="monitor_meld posi btn-sm" id="id-P3_EIN"
+                         style="left: 543px; bottom: 44px;"><b>P3</b></div>
+                    <div class="monitor_meld posi btn-sm" id="id-P3_St"
+                         style="left: 543px; bottom: 44px;"><b>P3</b></div>
+                    <button type="button" class="btn btn-info btn-sm button_js posi" id="P3_end_man_interrupt" value="0"
+                            style="display:none; left: 430px; bottom: 4px;">beende <br>Manual Interrupt
+                    </button>
+                    <div class="posi" style="left: 588px; bottom: 4px; width: 70px;">
+                        <table id="table_input_sollwert" align="center">
+                            <tbody>
+                            <tr>
+                                <input type="number" class="form-control input input_sollwert" id="n_P3"
+                                       placeholder="Frequenz"/>
+                            </tr>
+                            <tr>
+                                <td id="td-n_P3"> {{ sql_results['n_P3'] }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <script>
+                        // wenn Auto eingeschaltet und P3-Hand gedrueckt wird, dann Manual interrupt zeigen
+                        // (in SPS wird Manual Interrupt automatisch ausgefuehrt)
+                        $(".button_js#H_P3").click(function () {
+                            if ($('input:radio[name=Auto]:checked').val() == 1) {
+                                $("#P3_end_man_interrupt").show();
+                            }
+                        });
+                        // manual Interrupt beenden+Button wieder verstecken
+                        $("#P3_end_man_interrupt").click(function () {
+                            $("#P3_end_man_interrupt").hide();
+                        });
+                    </script>
+
+                    <!--    KV1-->
+                    <button type="button" class="btn btn-primary btn-sm button_js posi" id="H_KV1" value="change"
+                            style="left: 268.5px; bottom: 49px;">E/A
+                    </button>
+                    <div class="monitor_meld posi btn-sm" id="id-KV1_offen"
+                         style="left: 268.5px; bottom: 89px; "><b>KV1</b>
+                    </div>
+                    <div class="monitor_meld posi btn-sm" id="id-KV1_St"
+                         style="left: 268.5px; bottom: 89px; "><b>KV1</b>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-sm button_js posi" id="H_R1" value="change"
+                            style="left: 111px; bottom: 408px;">E/A
+                    </button>
+                    <div class="monitor_meld posi btn-sm" id="id-R1_EIN"
+                         style="left: 111px; bottom: 448px;"><b>R1</b></div>
+                    <div class="monitor_meld posi btn-sm" id="id-R1_St"
+                         style="left: 111px; bottom: 448px;"><b>R1</b></div>
+                    <div class="posi" style="left: 161px; bottom: 420px; width: 100px;">
+                        <table id="table_input_sollwert" align="center">
+                            <tbody>
+                            <tr>
+                                <input type="number" class="form-control input input_sollwert" id="n_R1"
+                                       placeholder="Frequenz"/>
+                            </tr>
+                            <tr>
+                                <td id="td-n_R1"> {{ sql_results['n_R1'] }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-sm button_js posi" id="H_Heiz" value="change"
+                            style="left: 798px; bottom: 212px;">E/A
+                    </button>
+                    <div class="monitor_meld posi btn-sm" id="id-Heiz_EIN"
+                         style="left: 798px; bottom: 252px;"><b>Heiz</b></div>
+                    <div class="monitor_meld posi btn-sm" id="id-Heiz_St"
+                         style="left: 798px; bottom: 252px;"><b>Heiz</b></div>
+
+
+                    {#                    <div class="monitor_meld posi btn-sm" id="id-pH2_St"#}
+                    {#                         style="left: 50px; bottom: 100px;"><b>pH2</b></div>#}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  Monitor Wert -> bloede
+   <script>
+        /*
+         * object.watch polyfill
+         *
+         * 2012-04-03
+         *
+         * By Eli Grey, http://eligrey.com
+         * Public Domain.
+         * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+         */
+
+        // object.watch
+        if (!Object.prototype.watch) {
+            Object.defineProperty(Object.prototype, "watch", {
+                enumerable: false
+                , configurable: true
+                , writable: false
+                , value: function (prop, handler) {
+                    var
+                        oldval = this[prop]
+                        , newval = oldval
+                        , getter = function () {
+                            return newval;
+                        }
+                        , setter = function (val) {
+                            oldval = newval;
+                            return newval = handler.call(this, prop, oldval, val);
+                        }
+                    ;
+
+                    if (delete this[prop]) { // can't watch constants
+                        Object.defineProperty(this, prop, {
+                            get: getter
+                            , set: setter
+                            , enumerable: true
+                            , configurable: true
+                        });
+                    }
+                }
+            });
+        }
+
+        // object.unwatch
+        if (!Object.prototype.unwatch) {
+            Object.defineProperty(Object.prototype, "unwatch", {
+                enumerable: false
+                , configurable: true
+                , writable: false
+                , value: function (prop) {
+                    var val = this[prop];
+                    delete this[prop]; // remove accessors
+                    this[prop] = val;
+                }
+            });
+        }
+
+
+{#        xxx = document.getElementById('id-P1_EIN').innerHTML;#}
+        window.xxx = 0;
+        //equal to var val = 2;
+
+        window.watch("xxx", function (id, old, cur) {
+            console.log("Changed property: ", id);
+            console.log("Original val: ", old);
+            console.log("New val: ", cur);
+        });
+
+        window.xxx = 0;
+
+    </script> -->
+{% endblock %}

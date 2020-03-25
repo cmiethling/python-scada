@@ -1,0 +1,45 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+    {
+        "name": "Current File",
+        "type": "python",
+        "request": "launch",
+        "console":"none",
+        "stopOnEntry": false,
+        "pythonPath": "${config:python.pythonPath}",
+        "program": "${file}",
+        "cwd": "${workspaceFolder}",
+        "envFile": "${workspaceFolder}/.env",
+        "debugOptions": [
+            "RedirectOutput"
+        ]
+    },
+        {
+            "name": "sps.py",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "console": "integratedTerminal",
+            "pythonPath": "${config:python.pythonPath}",
+            "program": "${workspaceRoot}/sps.py",
+            "cwd": "${workspaceRoot}",
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                // "RedirectOutput",                
+            ]
+        },
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${file}"
+        }
+    ]
+}

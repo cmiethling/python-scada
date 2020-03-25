@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!--Tabelle: sollwerte-->
+    <div class="container">
+        <table class="table table-hover" id="table_input_sollwert">
+            <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Bezeichnung/Funktion</th>
+                <th>Neuer Wert</th>
+                <th>Aktueller Wert</th>
+                <th>Einheit</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>V2<sub>Not</sub></td>
+                <td>Vega2-Drücküberwachung für automatischen NOT-Aus</td>
+                <td>
+                    <div class='col-md-10'>
+                        <input type="number" class="form-control input input_sollwert" id="V2_Not"
+                               placeholder="Eingeben+Enter"/>
+                    </div>
+                </td>
+                <td id="td-V2_Not">{{ sql_results['V2_Not'] }}</td>
+                <td>[mbar]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

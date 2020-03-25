@@ -1,0 +1,10 @@
+.bild {
+    z-index: 0;
+    position: relative;
+}
+
+.posi {
+    z-index: 1;
+    position: absolute;
+    /*background-color: white;*/
+}

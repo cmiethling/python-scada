@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+{% block content %}
+    <!--Tabelle: sollwerte-->
+    <div class="container">
+        <table class="table table-hover" id="table_input_sollwert">
+            <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Bezeichnung/Funktion</th>
+                <th>Neuer Wert</th>
+                <th>Aktueller Wert</th>
+                <th>Einheit</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>T<sub>R1,an</sub></td>
+                <td>Einstellbare Laufzeit R1</td>
+                <td>
+                    <div class='col-md-10'>
+                        <input type="number" class="form-control input input_sollwert" id="T_R1_an"
+                               placeholder="Eingeben+Enter"/>
+                    </div>
+                </td>
+                <td id="td-T_R1_an">{{ sql_results['T_R1_an'] }}</td>
+                <td>[sec]</td>
+            </tr>
+
+            <tr>
+                <td>T<sub>R1,aus</sub></td>
+                <td>Einstellbare Pausenzeit R1
+                </td>
+                <td>
+                    <div class='col-md-10'>
+                        <input type="number" class="form-control input input_sollwert" id="T_R1_aus"
+                               placeholder="Eingeben+Enter"/>
+                    </div>
+                </td>
+                <td id="td-T_R1_aus">{{ sql_results['T_R1_aus'] }}</td>
+                <td>[sec]</td>
+            </tr>
+
+            <tr>
+                <td>f<sub>R1</sub></td>
+                <td>Einstellbare Frequenz R1
+                </td>
+                <td>
+                    <div class='col-md-10'>
+                        <input type="number" class="form-control input input_sollwert" id="n_R1"
+                               placeholder="Eingeben+Enter"/>
+                    </div>
+                </td>
+                <td id="td-n_R1">{{ sql_results['n_R1'] }}</td>
+                <td>[Hz]</td>
+            </tr>
+
+            <tr>
+                <td>f<sub>R1,min</sub></td>
+                <td>minimale Frequenz R1</td>
+                <td>0.0</td>
+                <td></td>
+                <td>[Hz]</td>
+            </tr>
+            <tr>
+                <td>f<sub>R1,max</sub></td>
+                <td>maximale Frequenz R1</td>
+                <td>50.0</td>
+                <td></td>
+                <td>[Hz]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

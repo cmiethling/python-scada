@@ -1,0 +1,398 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-hover" id="Beschickungsvarianten_table">
+                            <thead>
+                            <tr>
+                                <th>
+                                    Vorlage-Beschickungsvariante:
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <div class="radio radio_choice">
+                                        <!-- id fuer Initialzustand-->
+                                        <label><input type="radio" name="Beschickungsvar" id="Bes1" value="1">1)
+                                            TOC-Konzentration (nur bei TOC Beschickung)</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="radio radio_choice">
+                                        <!-- id fuer Initialzustand-->
+                                        <label><input type="radio" name="Beschickungsvar" id="Bes2" value="2">2) bis
+                                            VN_max</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="radio radio_choice">
+                                        <!-- id fuer Initialzustand-->
+                                        <label><input type="radio" name="Beschickungsvar" id="Bes3" value="3">3)
+                                            ΔVN2</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- V2.00 Nachtrag: Truebung als 2. Vorlagebeschickungs-Ausloesung-->
+                            <tr>
+                                <th>Auslöser für Vorlagebeschickung:</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="radio radio_choice">
+                                        
+                                        <label><input type="radio" name="c_TOC_Trueb" id="c_TOC_EIN"
+                                                      value="0">Beschickung über TOC</label>
+                                    </div>
+                                </td>
+                                <tr>
+                                    <td>
+                                        <div class="radio radio_choice">
+                                            
+                                            <label><input type="radio" name="c_TOC_Trueb" id="Trueb_EIN"
+                                                        value="1">Beschickung über Trübung</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tr>
+
+                            <tr>
+                                <th>Notfall-Vorlage-Beschickung:</th>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="radio radio_choice">
+                                        <!-- id fuer Initialzustand-->
+                                        <label><input type="radio" name="Notfallvar_aktiv" id="Notf_EIN"                                       
+                                                      value="1">aktiviert</label>
+                                    </div>
+                                </td>
+                                <tr>
+                                    <td>
+                                        <div class="radio radio_choice">
+                                            <!-- id fuer Initialzustand-->
+                                            <label><input type="radio" name="Notfallvar_aktiv" id="Notf_AUS"       
+                                                    value="0">deaktiviert</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                // Radiobuttons initialisieren
+                //  Notfall Vorlage
+                Notfall_Vorl = "{{sql_results['Notfallvar_aktiv']}}";
+                // console.log("Notfall_Vorl: ", Notfall_Vorl);
+                if (Notfall_Vorl == 1) {
+                    $('input:radio[name=Notfallvar_aktiv]#Notf_EIN').prop('checked', true);
+                }
+                else if (Notfall_Vorl == 0) {
+                    $('input:radio[name=Notfallvar_aktiv]#Notf_AUS').prop('checked', true);
+                }
+                ;
+                //  Beschickungsvariante
+                Beschickungsvar = "{{sql_results['Beschickungsvar']}}";
+                // console.log("Beschickungsvar: ", Beschickungsvar);
+                if (Beschickungsvar == 1) {
+                    $('input:radio[name=Beschickungsvar]#Bes1').prop('checked', true);
+                }
+                else if (Beschickungsvar == 2) {
+                    $('input:radio[name=Beschickungsvar]#Bes2').prop('checked', true);
+                }
+                else if (Beschickungsvar == 3) {
+                    $('input:radio[name=Beschickungsvar]#Bes3').prop('checked', true);
+                }
+                ;
+
+                //  V2.00 Nachtrag: Truebung als 2. Vorlagebeschickungs-Ausloesung
+                // c_TOC (=0) oder Truebung (=1)
+                c_TOC_Trueb = "{{sql_results['c_TOC_Trueb']}}";
+                // console.log("c_TOC_Trueb: ", c_TOC_Trueb);
+                if (c_TOC_Trueb == 1) {
+                    $('input:radio[name=c_TOC_Trueb]#Trueb_EIN').prop('checked', true);
+                    $('input:radio[name=Beschickungsvar]#Bes1').prop('disabled', true);
+                }
+                else if (c_TOC_Trueb == 0) {
+                    $('input:radio[name=c_TOC_Trueb]#c_TOC_EIN').prop('checked', true);
+                }
+                ;
+            </script>
+
+            <!--Sollwerte-->
+            <div class="col-lg-9 col-md-9">
+                <table class="table table-hover" id="table_input_sollwert">
+                    <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Bezeichnung/Funktion</th>
+                        <th>Neuer Wert</th>
+                        <th>Aktueller Wert</th>
+                        <th>Einheit</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>c<sub>TOC,krit</sub></td>
+                        <td>TOC: Auslösewert für P1</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="c_TOC_krit"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-c_TOC_krit">{{ sql_results['c_TOC_krit'] }}</td>
+                        <td>[mg TOC/l]</td>
+                    </tr>
+
+                    <tr>
+                        <td>c<sub>TOC,max</sub></td>
+                        <td>TOC: Auslösewert für P1 während der Wartedauer ΔT<sub>Weiche</sub>
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="c_TOC_max"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-c_TOC_max">{{ sql_results['c_TOC_max'] }}</td>
+                        <td>[mg TOC/l]</td>
+                    </tr>
+
+<!--                V2.00  Nachtrag: Truebung als 2. Vorlagebeschickungs-Ausloesung-->
+                    <tr>
+                        <td>Trüb<sub>krit</sub></td>
+                        <td>Trübung: Auslösewert für P1</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="Trueb_krit"
+                                        placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Trueb_krit">{{ sql_results['Trueb_krit'] }}</td>
+                        <td>[FNU]</td>
+                    </tr>
+
+                    <tr>
+                        <td>Trüb<sub>max</sub></td>
+                        <td>Trübung: Auslösewert für P1</td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="Trueb_max"
+                                        placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Trueb_max">{{ sql_results['Trueb_max'] }}</td>
+                        <td>[FNU]</td>
+                    </tr>
+
+                    <tr>
+                        <td>c<sub>TOC,Vorlage</sub></td>
+                        <td>Errechnete TOC-Konzentration in der Vorlage zum Abgleich der VB-Variante 1
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="c_TOC_Vorlage"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-c_TOC_Vorlage">{{ sql_results['c_TOC_Vorlage'] }}</td>
+                        <td>
+                            <div class="monitor_val"
+                                 id="id-c_TOC_Vorlage">{{ sql_results['c_TOC_Vorlage'] }}</div>
+                        </td>
+                        <td>[mg TOC/l]</td>
+                    </tr>
+
+                    <tr>
+                        <td>c<sub>TOC,Vorlage,max</sub></td>
+                        <td>Maximale errechnete TOC-Konzentration in der Vorlage
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="c_TOC_Vorlage_max"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-c_TOC_Vorlage_max">{{ sql_results['c_TOC_Vorlage_max'] }}</td>
+                        <td>[mg TOC/l]</td>
+                    </tr>
+
+                    <tr>
+                        <td>F<sub>abm</sub></td>
+                        <td>Abminderungsfaktor gegen stetige Erhöhung der Auslösekonzentration VB-Variante 1
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="F_abm"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-F_abm">{{ sql_results['F_abm'] }}</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td>T<sub>F<sub>abm</sub></sub></td>
+                        <td>Zeitfenster nachdem Fabm aktiv wird
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="T_F_abm"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-T_F_abm">{{ sql_results['T_F_abm'] }}</td>
+                        <td>[h]</td>
+                    </tr>
+
+                    <tr>
+                        <td>ΔT<sub>Weiche</sub></td>
+                        <td>Wartedauer zur Auslösung der VB nach erfolgter VB für VB-Variante 3
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="Delta_T_Weiche"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Delta_T_Weiche">{{ sql_results['Delta_T_Weiche'] }}</td>
+                        <td>[h]</td>
+                    </tr>
+
+                    <tr>
+                        <td>T<sub>P1,max</sub></td>
+                        <td>Maximale Laufzeit von P1 für Abbruch der VB-Variante 1
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="T_P1_max"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-T_P1_max">{{ sql_results['T_P1_max'] }}</td>
+                        <td>[sec]</td>
+                    </tr>
+
+                    <tr>
+                        <td>T<sub>P2,max</sub></td>
+                        <td>Maximale Laufzeit von P1 für Abbruch der VB-Variante 2
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="T_P2_max"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-T_P2_max">{{ sql_results['T_P2_max'] }}</td>
+                        <td>[sec]</td>
+                    </tr>
+
+                    <tr>
+                        <td>T<sub>P3,max</sub></td>
+                        <td>Maximale Laufzeit von P1 für Abbruch der VB-Variante 3
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="T_P3_max"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-T_P3_max">{{ sql_results['T_P3_max'] }}</td>
+                        <td>[sec]</td>
+                    </tr>
+
+                    <tr>
+                        <td>VN<sub>min</sub></td>
+                        <td>Minimales Vorlageniveau
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="VN_min"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-VN_min">{{ sql_results['VN_min'] }}</td>
+                        <td>[cm]</td>
+                    </tr>
+
+                    <tr>
+                        <td>VN<sub>max</sub></td>
+                        <td>Maximales Vorlageniveau
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="VN_max"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-VN_max">{{ sql_results['VN_max'] }}</td>
+                        <td>[cm]</td>
+                    </tr>
+
+                    <tr>
+                        <td>ΔVN<sub>1</sub></td>
+                        <td>Füllstandsänderung für VB-Variante 1
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="Delta_VN_1"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Delta_VN_1">{{ sql_results['Delta_VN_1'] }}</td>
+                        <td>[cm]</td>
+                    </tr>
+
+                    <tr>
+                        <td>ΔVN<sub>2</sub></td>
+                        <td>Füllstandsänderung für VB-Variante 3
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="Delta_VN_2"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Delta_VN_2">{{ sql_results['Delta_VN_2'] }}</td>
+                        <td>[cm]</td>
+                    </tr>
+
+                    <tr>
+                        <td>ΔVN<sub>3</sub></td>
+                        <td>Füllstandsänderung für Notfall-Vorlage-Beschickungsvariante
+                        </td>
+                        <td>
+                            <div class='col-md-12'>
+                                <input type="number" class="form-control input input_sollwert" id="Delta_VN_3"
+                                       placeholder="Enter"/>
+                            </div>
+                        </td>
+                        <td id="td-Delta_VN_3">{{ sql_results['Delta_VN_3'] }}</td>
+                        <td>[cm]</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

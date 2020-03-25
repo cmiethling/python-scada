@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="../static/css/bootsrap.min.css">
+    <!-- Datatables CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/jquery.dataTables.css">
+    <link href="../static/css/colReorder.dataTables.min.css" rel="stylesheet">
+    <link href="../static/css/buttons.dataTables.min.css" rel="stylesheet">
+
+
+    <!-- jQuery library -->
+    <script src="../static/js/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="../static/js/bootstrap.min.js"></script>
+    <!-- Latest D3 library -->
+    <script src="../static/js/d3.v4.js"></script>
+    <!-- Datatable library -->
+    <script type="text/javascript" charset="utf8" src="../static/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="../static/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf"></script>
+
+    <script src="../static/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="../static/js/buttons.flash.min.js"></script>
+    <script src="../static/js/jszip.min.js"></script>
+    <script src="../static/js/pdfmake.min.js"></script>
+
+    <script type="text/javascript" src="../static/js/vfs_fonts.js"></script>
+    <script type="text/javascript" src="../static/js/buttons.html5.min.js"></script>
+
+
+    {#eigene Scripte#}
+    <script type="text/javascript" src="../static/js/own/change_values.js"></script>
+    <script type="text/javascript" src="../static/js/own/constant_request.js"></script>
+
+
+    <!-- Import macros that dynamically highlights nav-bar selection -->
+    {% from "macros.html" import nav_link with context %}
+
+</head>
+<body>
+<nav class="navbar navbar-default navigation navbar-inverse">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            {{ nav_link('anlage', 'Anlage') }}
+            {{ nav_link('meldung', 'Meldungen') }}
+            {{ nav_link('diagramm_echtzeit', 'Diagramm Echtzeit') }}
+            {{ nav_link('diagramm', 'Diagramm Archiv') }}
+            {{ nav_link('vorlage', 'Parameter Vorlage Beschickung') }}
+            {{ nav_link('ruhrwerk', 'Param. Rührwerk') }}
+            {{ nav_link('reaktor', 'Param. Reaktor') }}
+            {{ nav_link('not_abschaltung', 'Param. Not-Abschaltung') }}
+            {{ nav_link('mysql', 'mysql') }}
+        </ul>
+    </div>
+</nav>
+<!-- fuer Bedienung: Hand Auto und Quittierung -->
+<div> 
+    <ph>
+        Betriebsart:
+    </ph>
+
+    <label class="radio-inline radio_choice"> <input type="radio" name="Auto" id="Auto_AUS" value="0">
+        Hand</label>
+    <label class="radio-inline radio_choice"> <input type="radio" name="Auto" id="Auto_EIN" value="1">
+        Auto</label>
+    <button type="button" class="btn btn-warning button_js" id="Quittierung" value="1">Quittierung
+    </button>
+    <label>
+        <div class="monitor_meld" style="display:none;" id="id-Testbit"><b>Programm online</b></div>
+    </label>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Hand-Auto Radiobutton initialisieren
+        $.ajax({
+            url: '/page_load',
+            type: 'GET',
+            success: function (data) {
+                //console.log(data);
+
+                // Auto auslesen
+                var auto = data['Auto_Hand'];
+                if (auto == 1) {
+                    $('input:radio[name=Auto]#Auto_EIN').prop('checked', true);
+                }
+                else if (auto == 0) {
+                    $('input:radio[name=Auto]#Auto_AUS').prop('checked', true);
+                }
+
+                /*
+                 // Testbit auslesen
+                tb_name = 'Testbit';
+                var tb_val = data[tb_name];
+                var tb_id = $("div.monitor_meld#id-" + tb_name);
+                //console.log(tb_name, tb_val, tb_id);
+
+                if (tb_val == 1) {
+                    tb_id.addClass('btn-success').removeClass('btn-danger btn');
+                    tb_id.html('Programm Online');
+                    tb_id.show()
+                    // nach 5 Sekunden verschwindet positive Meldung wieder
+                    setTimeout(function () {
+                        tb_id.hide();
+                    }, 5000);
+                }
+                else if (tb_val == 0) {
+                    tb_id.addClass('btn-danger btn').removeClass('btn-success');
+                    tb_id.html('Programm nicht online, NEU STARTEN!');
+                    tb_id.show();
+                }
+                **/
+            }//success
+        });
+    });
+</script>
+{% block content %}{% endblock %}
+
+</body>
+</html>
