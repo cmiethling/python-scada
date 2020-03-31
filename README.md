@@ -4,7 +4,7 @@ UI Program which runs via a web-browser. Programming languages: Python, JavaScri
 With almost no skills in any of the languages I successfully programmed this Python application and it worked throughout the whole lifetime of the project!
 Please keep in mind that I never did a project like this before AND that I did almost everything on my own!
 
-[Overview](files/architecture.pdf "Overview")
+## [Overview](files/architecture.pdf "Overview")
 
 # Background
 
