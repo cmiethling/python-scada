@@ -7,7 +7,7 @@ Please keep in mind that I never did a project like this before AND that I did a
 [Overview](files/architecture.pdf "Overview")
 
 ## Personal highlight
-[sql_connector.py >> select_all()](https://github.com/cmiethli/python-scada/blob/b5262527d3704ad4602349acbfb476366365122b/sql_connector.py#L157)
+[sql_connector.py  >>   select_all()](https://github.com/cmiethli/python-scada/blob/b5262527d3704ad4602349acbfb476366365122b/sql_connector.py#L157)
 
 ## Background
 
